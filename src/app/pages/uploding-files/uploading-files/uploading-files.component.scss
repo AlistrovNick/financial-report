@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.browsing-file {
+    display: flex;
+    gap: 40px;
+}
+
+.browsing {
+    width: 340px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.report-name {
+    font-size: 20px;
+    line-height: 36px;
+}
+
+.report-path {
+    font-size: 20px;
+    line-height: 36px;  
+}

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="browsing-file">
+    <div class="browsing">
+      <span class="report-name">Players Report</span>
+      <button
+        (click)="openFile('playersReport')"
+        mat-raised-button
+        color="primary"
+      >
+        Browse
+      </button>
+    </div>
+    <span class="report-path">{{ reports.playersReport }}</span>
+  </div>
+  <div class="browsing-file">
+    <div class="browsing">
+      <span class="report-name">Players Report Previous</span>
+      <button
+        (click)="openFile('playersReportPrev')"
+        mat-raised-button
+        color="primary"
+      >
+        Browse
+      </button>
+    </div>
+    <span class="report-path">{{ reports.playersReportPrev }}</span>
+  </div>
+</div>
