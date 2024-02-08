@@ -7,5 +7,13 @@
     display: flex;
     justify-content: end;
     gap: 20px;
-    padding: 50px 100px 50px 0;
+    padding: 50px 0 50px 0;
+}
+
+.filter-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    gap: 20px;
 }

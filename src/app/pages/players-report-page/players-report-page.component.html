@@ -1,0 +1,50 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [color]="'primary'"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="onCheckBoxChange(row)"
+                      [color]="'primary'"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Login </th>
+      <td mat-cell *matCellDef="let player" (click)="onCellClick()"> {{player.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency </th>
+      <td mat-cell *matCellDef="let player" (click)="onCellClick()"> {{player.currency}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="casino">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Casino </th>
+      <td mat-cell *matCellDef="let player" (click)="onCellClick()"> {{player.casino}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sport">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sport </th>
+      <td mat-cell *matCellDef="let player" (click)="onCellClick()"> {{player.sport}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="balance">
+      <th mat-header-cell *matHeaderCellDef> Balance </th>
+      <td mat-cell *matCellDef="let player" (click)="onCellClick()"> {{player.balance}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+  

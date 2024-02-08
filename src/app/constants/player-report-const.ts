@@ -1,0 +1,11 @@
+export const HEADER_USERNAME = 'Username';
+export const HEADER_CURRENCY = 'Currency Id';
+export const HEADER_CURRENT_BALANCE = 'Current Balance';
+export const HEADER_CASINO_NET_PROFIT = 'Casino Net Profit';
+export const HEADER_SPORT_NET_PROFIT = 'Sport Net Profit';
+export const HEADER_DEPOSITS = 'Deposits';
+export const HEADER_WITHDRAWAL_AMOUNT = 'Withdrawal Amount';
+export const HEADER_B_TAG = 'BTag';
+export const VALUE_TEST = 'test';
+export const VALUE_TRY = 'TRY';
+export const VALUE_USD = 'USD';

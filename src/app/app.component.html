@@ -1,23 +1,58 @@
 <mat-stepper linear #stepper>
   <mat-step class="step">
     <ng-template matStepLabel>Uploading Reports</ng-template>
+    <div class="controls">
+      <button
+        (click)="onNextClickFirstStep()"
+        mat-raised-button
+        color="primary"
+        matStepperNext
+      >
+        Next
+      </button>
+    </div>
     <div class="content">
       <app-uploading-files
         [reports]="reportsPaths"
         (changeReport)="onChangeReport($event)"
       ></app-uploading-files>
     </div>
-    <div class="controls">
-      <button (click)="readFiles()" mat-raised-button color="primary" matStepperNext>Next</button>
-    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Players Report</ng-template>
-    <div class="content">
-    </div>
     <div class="controls">
       <button mat-raised-button color="primary" matStepperPrevious>Back</button>
       <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+    <div class="filter">
+      <form class="filter-form" [formGroup]="playersReportFilterForm">
+        <mat-form-field appearance="fill">
+          <mat-label>casino TRY</mat-label>
+          <input matInput formControlName="casinoTRY" type="number" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>casino USD</mat-label>
+          <input matInput formControlName="casinoUSD" type="number" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>sport TRY</mat-label>
+          <input matInput formControlName="sportTRY" type="number" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>sport USD</mat-label>
+          <input matInput formControlName="sportUSD" type="number" />
+        </mat-form-field>
+        <div class="filter-controls">
+          <button mat-raised-button color="primary" (click)="changeFilter()">Apply</button>
+        </div>
+      </form>
+    </div>
+    <div class="content">
+      <app-players-report-page
+        [players]="playersDifference"
+        [filter]="playersReportFilter"
+        (select)="onPlayersSelect($event)"
+      ></app-players-report-page>
     </div>
   </mat-step>
   <mat-step>
