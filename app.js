@@ -10,13 +10,13 @@ function createWindow() {
     ipcMain.handle('file:read', handleFileRead);
 
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
-    })
+    });
+    mainWindow.maximize();
 
     mainWindow.loadURL(
         url.format({
@@ -25,9 +25,6 @@ function createWindow() {
             slashes: true
         })
     );
-
-    // Dev tools
-    mainWindow.webContents.openDevTools()
 
     mainWindow.on('closed', function () {
         mainWindow = null

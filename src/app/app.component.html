@@ -43,7 +43,9 @@
           <input matInput formControlName="sportUSD" type="number" />
         </mat-form-field>
         <div class="filter-controls">
-          <button mat-raised-button color="primary" (click)="changeFilter()">Apply</button>
+          <button mat-raised-button color="primary" (click)="changeFilter()">
+            Apply
+          </button>
         </div>
       </form>
     </div>
@@ -57,10 +59,14 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Final Report</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div class="controls">
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="onReset()">
+        Reset
+      </button>
+    </div>
+    <div class="content">
+      <app-final-report [reports]="selectedPlayers"></app-final-report>
     </div>
   </mat-step>
 </mat-stepper>

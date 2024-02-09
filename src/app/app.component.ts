@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 import { ReportName } from './interfaces/reports';
 import { ReportsPaths } from './interfaces/reports';
@@ -15,6 +16,8 @@ import * as playerReportConst from './constants/player-report-const';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('stepper') stepper!: MatStepper;
+
   reportsPaths: ReportsPaths = {
     playersReport: '',
     playersReportPrev: '',
@@ -33,14 +36,14 @@ export class AppComponent {
     casinoTRY: 0,
     casinoUSD: 0,
     sportTRY: 0,
-    sportUSD: 0
-  }
+    sportUSD: 0,
+  };
 
   playersReportFilterForm = new FormGroup({
     casinoTRY: new FormControl(this.playersReportFilter.casinoTRY),
     casinoUSD: new FormControl(this.playersReportFilter.casinoUSD),
     sportTRY: new FormControl(this.playersReportFilter.sportTRY),
-    sportUSD: new FormControl(this.playersReportFilter.sportUSD)
+    sportUSD: new FormControl(this.playersReportFilter.sportUSD),
   });
 
   constructor(private electronService: ElectronService) {}
@@ -56,8 +59,6 @@ export class AppComponent {
 
   onPlayersSelect(players: PlayerReport[]) {
     this.selectedPlayers = players;
-
-    console.log(this.selectedPlayers);
   }
 
   onChangeReport(paths: ReportsPaths) {
@@ -70,7 +71,26 @@ export class AppComponent {
       casinoUSD: this.playersReportFilterForm.value.casinoUSD || 0,
       sportTRY: this.playersReportFilterForm.value.sportTRY || 0,
       sportUSD: this.playersReportFilterForm.value.sportUSD || 0,
-    };    
+    };
+  }
+
+  onReset() {
+    this.stepper.reset();
+    this.resetAllData();
+  }
+
+  private resetAllData() {
+    this.reportsPaths.playersReport = '';
+    this.reportsPaths.playersReportPrev = '';
+    this.reports.playersReport = [];
+    this.reports.playersReportPrev = [];
+    this.playersDifference = [];
+    this.selectedPlayers = [];
+    this.playersReportFilter = { casinoTRY: 0, casinoUSD: 0, sportTRY: 0, sportUSD: 0 };
+    this.playersReportFilterForm.controls.casinoTRY.setValue(this.playersReportFilter.casinoTRY);
+    this.playersReportFilterForm.controls.casinoUSD.setValue(this.playersReportFilter.casinoUSD);
+    this.playersReportFilterForm.controls.sportTRY.setValue(this.playersReportFilter.sportTRY);
+    this.playersReportFilterForm.controls.sportUSD.setValue(this.playersReportFilter.sportUSD);
   }
 
   private async readFiles() {
@@ -80,11 +100,13 @@ export class AppComponent {
     ];
 
     for (let i = 0; i < reportsNames.length; i++) {
-      const rows = await this.electronService.ipcRenderer.invoke(
-        'file:read',
-        this.reportsPaths[reportsNames[i]]
-      );
-      this.reports[reportsNames[i]] = rows;
+      if (this.reportsPaths[reportsNames[i]].length !== 0) {
+        const rows = await this.electronService.ipcRenderer.invoke(
+          'file:read',
+          this.reportsPaths[reportsNames[i]]
+        );
+        this.reports[reportsNames[i]] = rows;
+      }
     }
   }
 

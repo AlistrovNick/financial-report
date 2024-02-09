@@ -155,8 +155,8 @@ export class PlayersReportPageComponent implements OnChanges, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource = new MatTableDataSource<PlayerReport>(elemenys);
-  // dataSource = new MatTableDataSource<PlayerReport>(this.players);
+  // dataSource = new MatTableDataSource<PlayerReport>(elemenys);
+  dataSource = new MatTableDataSource<PlayerReport>(this.players);
   selection = new SelectionModel<PlayerReport>(true, []);
 
   displayedColumns = [
@@ -208,6 +208,7 @@ export class PlayersReportPageComponent implements OnChanges, AfterViewInit {
     this.dataSource.data = filteredData;
 
     this.selection.clear();
+    this.select.emit([]);
   }
 
   ngAfterViewInit(): void {

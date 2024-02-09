@@ -15,12 +15,15 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadingFilesComponent } from './pages/uploding-files/uploading-files/uploading-files.component';
 import { PlayersReportPageComponent } from './pages/players-report-page/players-report-page.component';
+import { FinalReportComponent } from './pages/final-report/final-report.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadingFilesComponent,
     PlayersReportPageComponent,
+    FinalReportComponent
   ],
   imports: [
     BrowserModule,
